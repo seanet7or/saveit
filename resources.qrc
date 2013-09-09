@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file alias="application_icon">images/application_icon.png</file>
+        <file alias="backup-add">images/add_backup.png</file>
     </qresource>
 </RCC>

@@ -8,10 +8,13 @@ class BackupPlan : public QObject
     Q_OBJECT
 public:
     explicit BackupPlan(QObject *parent = 0);
-
+    static BackupPlan *fromWizard();
 signals:
 
 public slots:
+
+private:
+    Q_DISABLE_COPY(BackupPlan)
 
 };
 

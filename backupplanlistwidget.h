@@ -15,9 +15,13 @@ signals:
 
 public slots:
 
+private slots:
+    void newBackupWizard();
+
 private:
     const BackupPlanList &m_list;
     PushButton *m_emptyListButton;
+
 
 };
 

@@ -1,3 +1,6 @@
+icon-work/*
+icons/*.svg
+
 # C++ objects and libs
 
 *.slo
