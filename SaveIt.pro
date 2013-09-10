@@ -18,6 +18,7 @@ SOURCES += main.cpp\
     backupplan.cpp \
 	backupplanlistwidget.cpp \
     backupplanlist.cpp \
+    backupplaneditsourcesfilters.cpp
 
 HEADERS  += mainwindow.h \
     backupplan.h \
@@ -28,9 +29,11 @@ HEADERS  += mainwindow.h \
 	delegates/mousehoverable.h \
 	Animator.h \
 	dialog.h \
-	backupsrcdlg.h
+	backupsrcdlg.h \
+    backupplaneditsourcesfilters.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    backupplaneditsourcesfilters.ui
 
 RESOURCES += \
     resources.qrc
