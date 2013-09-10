@@ -11,10 +11,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Dialog);
     setWindowTitle(tr("SaveIt!"));
-    setWindowIcon(QIcon(":/application_icon"));
+    setWindowIcon(QIcon(":/application-icon"));
     //setAttribute(Qt::WA_DeleteOnClose);
 
-    m_sysTrayIcon = new QSystemTrayIcon(QIcon(":/application_icon"), this);
+    m_sysTrayIcon = new QSystemTrayIcon(QIcon(":/application-icon"), this);
     m_sysTrayContextMenu = new QMenu(this);
     m_sysTrayContextMenu->addAction(tr("Exit"), this, SLOT(OnExitClicked()));
     m_sysTrayIcon->setContextMenu(m_sysTrayContextMenu);

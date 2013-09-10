@@ -1,5 +1,6 @@
 #include "backupplanlistwidget.h"
 #include <QFont>
+#include <QtSvg/QSvgRenderer>
 #include "backupplan.h"
 
 
@@ -12,9 +13,9 @@ BackupPlanListWidget::BackupPlanListWidget(QWidget *parent, const BackupPlanList
     f.setPointSize(14);
     f.setWeight(QFont::DemiBold);
     f.setStyle(QFont::StyleOblique);
-    m_emptyListButton->setPixmap(QPixmap(":/backup-add"));
+    m_emptyListButton->setSVG(":/backup-add");
     m_emptyListButton->setFont(f);
-    m_emptyListButton->setText(tr("You have no backup plans yet.\nClick here to create a new backup."));
+    m_emptyListButton->setText(tr("You have no planned backups yet.\nClick here to create a new backup."));
     append(m_emptyListButton->Widget());
 }
 
