@@ -18,7 +18,7 @@ SOURCES += main.cpp\
     backupplan.cpp \
 	backupplanlistwidget.cpp \
     backupplanlist.cpp \
-    backupplaneditsourcesfilters.cpp
+    backupplaneditsourcesfilters.cpp \
 
 HEADERS  += mainwindow.h \
     backupplan.h \
