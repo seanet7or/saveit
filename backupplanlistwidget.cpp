@@ -7,10 +7,9 @@
 
 BackupPlanListWidget::BackupPlanListWidget(QWidget *parent, const BackupPlanList &list) :
     WidgetScrollArea(tr("Planned Backups"),
-                     tr("You have no planned backups yet.\nClick the button below to create a new backup."),
+                     tr("Here you can manage your planned backups.\nClick the button to create a new one."),
                      parent),
-    m_list(list),
-    m_helpLabel(WidgetSettings::newHelpLabel())
+    m_list(list)
 {
     m_addListItemButton = new PushButton();
     m_addListItemButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
@@ -21,7 +20,7 @@ BackupPlanListWidget::BackupPlanListWidget(QWidget *parent, const BackupPlanList
             SIGNAL(clicked()),
             this,
             SLOT(newBackupWizard()));
-    append(m_addListItemButton->Widget());
+    addButton(m_addListItemButton);
 }
 
 

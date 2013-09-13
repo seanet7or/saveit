@@ -4,6 +4,9 @@
 #include <QDialog>
 #include "widgetscrollarea.h"
 
+class PushButton;
+
+
 namespace Ui {
 class BackupPlanEditSourcesFilters;
 }
@@ -20,6 +23,8 @@ private:
     Ui::BackupPlanEditSourcesFilters *ui;
     WidgetScrollArea *m_sourcesWidget;
     WidgetScrollArea *m_filtersWidget;
+    PushButton *m_addSourceFolder;
+    PushButton *m_addSourceFile;
 };
 
 #endif // BACKUPPLANEDITSOURCESFILTERS_H

@@ -21,7 +21,6 @@ private slots:
 private:
     const BackupPlanList &m_list;
     PushButton *m_addListItemButton;
-    QLabel *m_helpLabel;
 
 };
 

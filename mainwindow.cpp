@@ -24,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
             this,
             SLOT(OnSysTrayClicked(QSystemTrayIcon::ActivationReason)));
     m_backupPlanListWidget = new BackupPlanListWidget(this, m_backupPlanList);
-    this->setContentsMargins(0, 0, 0, 0);
     //ui->centralWidget->setLayout(new QHBoxLayout);
     ui->centralWidget->layout()->addWidget(m_backupPlanListWidget);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file alias="backup-add">images/backup-add.svg</file>
         <file alias="application-icon">images/appicon.ico</file>
+        <file alias="folder-add">images/folder-add.svg</file>
+        <file alias="file-add">images/file-add.svg</file>
     </qresource>
 </RCC>
