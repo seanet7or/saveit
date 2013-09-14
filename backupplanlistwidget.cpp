@@ -11,7 +11,7 @@ BackupPlanListWidget::BackupPlanListWidget(QWidget *parent, const BackupPlanList
                      parent),
     m_list(list)
 {
-    m_addListItemButton = new PushButton();
+    m_addListItemButton = new PushButton(this, this);
     m_addListItemButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
     m_addListItemButton->setSVG(":/backup-add");
 

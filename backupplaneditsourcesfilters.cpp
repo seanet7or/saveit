@@ -15,8 +15,8 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     m_filtersWidget(new WidgetScrollArea(tr("Filters"),
                                          tr("Additionally, you may set up a filter to exclude some of the files and subdirectories from the backup."),
                                          this)),
-    m_addSourceFolder(new PushButton(this)),
-    m_addSourceFile(new PushButton(this))
+    m_addSourceFolder(new PushButton(this, this)),
+    m_addSourceFile(new PushButton(this, this))
 {
     ui->setupUi(this);
     setWindowTitle(tr("Creating A New Backup - Select Sources"));

@@ -19,6 +19,8 @@ SOURCES += main.cpp\
 	backupplanlistwidget.cpp \
     backupplanlist.cpp \
     backupplaneditsourcesfilters.cpp \
+    backupsource.cpp \
+    backupsourcewidget.cpp
 
 HEADERS  += mainwindow.h \
     backupplan.h \
@@ -30,7 +32,9 @@ HEADERS  += mainwindow.h \
 	Animator.h \
 	dialog.h \
 	backupsrcdlg.h \
-    backupplaneditsourcesfilters.h
+    backupplaneditsourcesfilters.h \
+    backupsource.h \
+    backupsourcewidget.h
 
 FORMS    += mainwindow.ui \
     backupplaneditsourcesfilters.ui
