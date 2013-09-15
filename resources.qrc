@@ -4,5 +4,7 @@
         <file alias="application-icon">images/appicon.ico</file>
         <file alias="folder-add">images/folder-add.svg</file>
         <file alias="file-add">images/file-add.svg</file>
+        <file alias="delete">images/delete.svg</file>
+        <file alias="edit">images/edit.svg</file>
     </qresource>
 </RCC>

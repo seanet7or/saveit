@@ -4,6 +4,7 @@
 #include <QHBoxLayout>
 #include "widgetsettings.h"
 #include "pushbutton.h"
+#include "backupsourcewidget.h"
 
 
 BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
@@ -15,8 +16,8 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     m_filtersWidget(new WidgetScrollArea(tr("Filters"),
                                          tr("Additionally, you may set up a filter to exclude some of the files and subdirectories from the backup."),
                                          this)),
-    m_addSourceFolder(new PushButton(this, this)),
-    m_addSourceFile(new PushButton(this, this))
+    m_addSourceFolder(new PushButton(m_sourcesWidget, this)),
+    m_addSourceFile(new PushButton(m_sourcesWidget, this))
 {
     ui->setupUi(this);
     setWindowTitle(tr("Creating A New Backup - Select Sources"));
@@ -30,6 +31,9 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     layout->setContentsMargins(0, 0, 0, 0);
     m_sourcesWidget->addButton(m_addSourceFolder);
     m_sourcesWidget->addButton(m_addSourceFile);
+    m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
+    m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
+    m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
     layout->addWidget(m_sourcesWidget);
     layout->addWidget(m_filtersWidget);
     setWindowModality(Qt::WindowModal);

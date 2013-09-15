@@ -1,18 +1,20 @@
 #ifndef BACKUPSOURCEWIDGET_H
 #define BACKUPSOURCEWIDGET_H
-
+#include <QSharedPointer>
 #include <QWidget>
 #include <QPushButton>
 #include <QSvgRenderer>
+#include <QLabel>
 #include "backupsource.h"
+#include "iconbutton.h"
+#include "delegates/mousehovercomposite.h"
 
 
-class BackupSourceWidget : public QPushButton
+class BackupSourceWidget : public QWidget, protected MouseHoverComposite
 {
     Q_OBJECT
 public:
-    explicit BackupSourceWidget(BackupSource *source, QWidget *parent = 0);
-    void setSVG(const QString &name);
+    explicit BackupSourceWidget(QSharedPointer<BackupSource> source, QWidget *parent = 0);
 signals:
 
 public slots:
@@ -21,8 +23,10 @@ protected:
     virtual void paintEvent(QPaintEvent *);
 
 private:
-    QSvgRenderer m_svg;
-
+    QSharedPointer<BackupSource> m_source;
+    QSharedPointer<QLabel> m_sourceLabel;
+    QSharedPointer<IconButton> m_deleteButton;
+    QSharedPointer<IconButton> m_editButton;
 };
 
 #endif // BACKUPSOURCEWIDGET_H

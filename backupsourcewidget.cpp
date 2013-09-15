@@ -1,32 +1,42 @@
 #include "backupsourcewidget.h"
 #include "backupsource.h"
 #include "widgetsettings.h"
+#include <QVBoxLayout>
+#include "delegates/mousehoverable.h"
 
 
-BackupSourceWidget::BackupSourceWidget(BackupSource *source,
+BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
                                        QWidget *parent) :
-    QPushButton(parent)
+    QWidget(parent),
+    MouseHoverComposite(new MouseHoverable(this)),
+    m_source(source),
+    m_sourceLabel(WidgetSettings::newTextLabel(this)),
+    m_deleteButton(QSharedPointer<IconButton>(new IconButton(this))),
+    m_editButton(QSharedPointer<IconButton>(new IconButton(this)))
 {
-
+    m_sourceLabel->setText(m_source->directory().absolutePath());
+    this->setLayout(new QHBoxLayout(this));
+    m_deleteButton->setSVG(":/delete");
+    m_editButton->setSVG(":/edit");
+    layout()->setContentsMargins(8, 1, 8, 1);
+    layout()->addWidget(m_sourceLabel.data());
+    layout()->addWidget(m_editButton.data());
+    layout()->addWidget(m_deleteButton.data());
+    int h = m_sourceLabel->height();
+    m_deleteButton->setFixedHeight(h);
+    m_editButton->setFixedHeight(h);
+    setFixedHeight(h);
 }
 
 
 void BackupSourceWidget::paintEvent(QPaintEvent *e)
 {
-    int h = rect().height() - 2 * WidgetSettings::iconButtonTopLeftMargins();
-    int w = rect().width() - 2 * WidgetSettings::iconButtonLeftRightMargins();
-    int l = std::min(w, h);
-    int xOff = rect().width() - l;
-    xOff /= 2;
-    int yOff = rect().height() - l;
-    yOff /= 2;
-    QRect target(rect().x() + xOff,
-                 rect().y() + yOff,
-                 l, l);
-}
-
-
-void BackupSourceWidget::setSVG(const QString &name)
-{
-    m_svg.load(name);
+    QPainter painter(this);
+    painter.setPen(QColor(150, 150, 150, 64));
+    painter.drawLine(rect().x(), rect().y(),
+                     rect().right(), rect().y());
+    painter.drawLine(rect().x(), rect().bottom(),
+                     rect().right(), rect().bottom());
+    DrawMouseHoverRect(painter);
+    QWidget::paintEvent(e);
 }
