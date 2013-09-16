@@ -16,8 +16,10 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     m_filtersWidget(new WidgetScrollArea(tr("Filters"),
                                          tr("Additionally, you may set up a filter to exclude some of the files and subdirectories from the backup."),
                                          this)),
-    m_addSourceFolder(new PushButton(m_sourcesWidget, this)),
-    m_addSourceFile(new PushButton(m_sourcesWidget, this))
+    m_addSourceFolder(new PushButton(this)),
+    m_addSourceFile(new PushButton(this)),
+    m_continue(new PushButton(this)),
+    m_cancel(new PushButton(this))
 {
     ui->setupUi(this);
     setWindowTitle(tr("Creating A New Backup - Select Sources"));
@@ -27,15 +29,25 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     m_addSourceFolder->setSVG(":/folder-add");
     m_addSourceFile->setText(tr("Add a file"));
     m_addSourceFile->setSVG(":/file-add");
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    QVBoxLayout *layout = new QVBoxLayout();
     layout->setContentsMargins(0, 0, 0, 0);
     m_sourcesWidget->addButton(m_addSourceFolder);
     m_sourcesWidget->addButton(m_addSourceFile);
     m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
     m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
     m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
+    m_continue->setSVG(":/continue");
+    m_continue->setText(tr("Continue"));
+    m_cancel->setSVG(":/cancel");
+    m_cancel->setText(tr("Cancel"));
     layout->addWidget(m_sourcesWidget);
     layout->addWidget(m_filtersWidget);
+    QHBoxLayout *nextLayout = new QHBoxLayout();
+    nextLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Ignored));
+    nextLayout->addWidget(m_cancel);
+    nextLayout->addWidget(m_continue);
+    nextLayout->setContentsMargins(0, 0, 8, 8);
+    layout->addLayout(nextLayout);
     setWindowModality(Qt::WindowModal);
     this->setLayout(layout);
 }

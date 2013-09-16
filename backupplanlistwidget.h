@@ -9,7 +9,7 @@ class BackupPlanListWidget : public WidgetScrollArea
 {
     Q_OBJECT
 public:
-    explicit BackupPlanListWidget(QWidget *parent, const BackupPlanList &list);
+    explicit BackupPlanListWidget(QWidget *parent, BackupPlanList &list);
 
 signals:
 
@@ -19,7 +19,7 @@ private slots:
     void newBackupWizard();
 
 private:
-    const BackupPlanList &m_list;
+    BackupPlanList &m_list;
     PushButton *m_addListItemButton;
 
 };

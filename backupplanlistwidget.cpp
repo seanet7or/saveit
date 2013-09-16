@@ -5,13 +5,13 @@
 #include "widgetsettings.h"
 
 
-BackupPlanListWidget::BackupPlanListWidget(QWidget *parent, const BackupPlanList &list) :
+BackupPlanListWidget::BackupPlanListWidget(QWidget *parent, BackupPlanList &list) :
     WidgetScrollArea(tr("Planned Backups"),
                      tr("Here you can manage your planned backups.\nClick the button to create a new one."),
                      parent),
     m_list(list)
 {
-    m_addListItemButton = new PushButton(this, this);
+    m_addListItemButton = new PushButton(this);
     m_addListItemButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
     m_addListItemButton->setSVG(":/backup-add");
 

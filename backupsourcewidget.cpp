@@ -22,6 +22,7 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     layout()->addWidget(m_sourceLabel.data());
     layout()->addWidget(m_editButton.data());
     layout()->addWidget(m_deleteButton.data());
+    ((QHBoxLayout*)layout())->addSpacerItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Ignored));
     int h = m_sourceLabel->height();
     m_deleteButton->setFixedHeight(h);
     m_editButton->setFixedHeight(h);

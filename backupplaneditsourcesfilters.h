@@ -25,6 +25,8 @@ private:
     WidgetScrollArea *m_filtersWidget;
     PushButton *m_addSourceFolder;
     PushButton *m_addSourceFile;
+    PushButton *m_continue;
+    PushButton *m_cancel;
 };
 
 #endif // BACKUPPLANEDITSOURCESFILTERS_H

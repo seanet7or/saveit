@@ -6,5 +6,7 @@
         <file alias="file-add">images/file-add.svg</file>
         <file alias="delete">images/delete.svg</file>
         <file alias="edit">images/edit.svg</file>
+        <file alias="continue">images/continue.svg</file>
+        <file alias="cancel">images/cancel.svg</file>
     </qresource>
 </RCC>
