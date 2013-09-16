@@ -2,6 +2,7 @@
 #include "ui_backupplaneditsourcesfilters.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QFileDialog>
 #include "widgetsettings.h"
 #include "pushbutton.h"
 #include "backupsourcewidget.h"
@@ -27,15 +28,17 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     this->setContentsMargins(0, 0, 0, 0);
     m_addSourceFolder->setText(tr("Add a folder"));
     m_addSourceFolder->setSVG(":/folder-add");
+    connect(m_addSourceFolder,
+            SIGNAL(clicked()),
+            this,
+            SLOT(onAddSourceButtonPressed()));
     m_addSourceFile->setText(tr("Add a file"));
     m_addSourceFile->setSVG(":/file-add");
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setContentsMargins(0, 0, 0, 0);
     m_sourcesWidget->addButton(m_addSourceFolder);
     m_sourcesWidget->addButton(m_addSourceFile);
-    m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
-    m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
-    m_sourcesWidget->append(new BackupSourceWidget(QSharedPointer<BackupSource>(new BackupSource()), this));
+    addSource(QDir::homePath());
     m_continue->setSVG(":/continue");
     m_continue->setText(tr("Continue"));
     m_cancel->setSVG(":/cancel");
@@ -56,4 +59,40 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
 BackupPlanEditSourcesFilters::~BackupPlanEditSourcesFilters()
 {
     delete ui;
+}
+
+
+void BackupPlanEditSourcesFilters::addSource(QDir dir)
+{
+    QSharedPointer<BackupSource> source(new BackupSource(dir));
+    BackupSourceWidget *widget = new BackupSourceWidget(source);
+    m_sourcesWidget->append(widget);
+    connect(widget,
+            SIGNAL(deleteButtonClicked()),
+            this,
+            SLOT(onDeleteButtonPressed()));
+}
+
+
+void BackupPlanEditSourcesFilters::onAddSourceButtonPressed()
+{
+    QString dir = QFileDialog::getExistingDirectory(this,
+                                                    tr("Select a folder to add to the backup"),
+                                                    QDir::homePath());
+    if (!dir.isEmpty())
+    {
+        addSource(dir);
+    }
+}
+
+
+void BackupPlanEditSourcesFilters::onDeleteButtonPressed()
+{
+    BackupSourceWidget *w = qobject_cast<BackupSourceWidget*>(sender());
+    if (w)
+    {
+        QSharedPointer<BackupSource> source = w->source();
+        delete w;
+        m_sourceList.removeAt(m_sourceList.indexOf(source));
+    }
 }

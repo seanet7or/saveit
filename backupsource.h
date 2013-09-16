@@ -6,7 +6,7 @@
 class BackupSource
 {
 public:
-    BackupSource();
+    BackupSource(QDir dir);
     QDir directory() const;
 private:
     QDir m_dir;

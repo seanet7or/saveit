@@ -15,7 +15,9 @@ class BackupSourceWidget : public QWidget, protected MouseHoverComposite
     Q_OBJECT
 public:
     explicit BackupSourceWidget(QSharedPointer<BackupSource> source, QWidget *parent = 0);
+    QSharedPointer<BackupSource> source() const;
 signals:
+    void deleteButtonClicked();
 
 public slots:
 
@@ -25,8 +27,8 @@ protected:
 private:
     QSharedPointer<BackupSource> m_source;
     QSharedPointer<QLabel> m_sourceLabel;
-    QSharedPointer<IconButton> m_deleteButton;
-    QSharedPointer<IconButton> m_editButton;
+    IconButton* m_deleteButton;
+    IconButton* m_editButton;
 };
 
 #endif // BACKUPSOURCEWIDGET_H

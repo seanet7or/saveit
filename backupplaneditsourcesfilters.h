@@ -2,9 +2,11 @@
 #define BACKUPPLANEDITSOURCESFILTERS_H
 
 #include <QDialog>
+#include <QDir>
 #include "widgetscrollarea.h"
 
 class PushButton;
+class BackupSource;
 
 
 namespace Ui {
@@ -20,6 +22,14 @@ public:
     ~BackupPlanEditSourcesFilters();
 
 private:
+    void addSource(QDir dir);
+
+private slots:
+    void onAddSourceButtonPressed();
+    void onDeleteButtonPressed();
+
+private:
+    QList<QSharedPointer<BackupSource> > m_sourceList;
     Ui::BackupPlanEditSourcesFilters *ui;
     WidgetScrollArea *m_sourcesWidget;
     WidgetScrollArea *m_filtersWidget;

@@ -1,8 +1,8 @@
 #include "backupsource.h"
 
 
-BackupSource::BackupSource() :
-    m_dir(QDir::homePath())
+BackupSource::BackupSource(QDir dir) :
+    m_dir(dir)
 {
 }
 

@@ -11,17 +11,21 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     MouseHoverComposite(new MouseHoverable(this)),
     m_source(source),
     m_sourceLabel(WidgetSettings::newTextLabel(this)),
-    m_deleteButton(QSharedPointer<IconButton>(new IconButton(this))),
-    m_editButton(QSharedPointer<IconButton>(new IconButton(this)))
+    m_deleteButton(new IconButton(this)),
+    m_editButton(new IconButton(this))
 {
     m_sourceLabel->setText(m_source->directory().absolutePath());
     this->setLayout(new QHBoxLayout(this));
     m_deleteButton->setSVG(":/delete");
+    connect(m_deleteButton,
+            SIGNAL(pressed()),
+            this,
+            SIGNAL(deleteButtonClicked()));
     m_editButton->setSVG(":/edit");
     layout()->setContentsMargins(8, 1, 8, 1);
     layout()->addWidget(m_sourceLabel.data());
-    layout()->addWidget(m_editButton.data());
-    layout()->addWidget(m_deleteButton.data());
+    layout()->addWidget(m_editButton);
+    layout()->addWidget(m_deleteButton);
     ((QHBoxLayout*)layout())->addSpacerItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Ignored));
     int h = m_sourceLabel->height();
     m_deleteButton->setFixedHeight(h);
@@ -40,4 +44,10 @@ void BackupSourceWidget::paintEvent(QPaintEvent *e)
                      rect().right(), rect().bottom());
     DrawMouseHoverRect(painter);
     QWidget::paintEvent(e);
+}
+
+
+QSharedPointer<BackupSource> BackupSourceWidget::source() const
+{
+     return m_source;
 }
