@@ -8,6 +8,7 @@
 #include "backupsource.h"
 #include "iconbutton.h"
 #include "delegates/mousehovercomposite.h"
+#include "checkbutton.h"
 
 
 class BackupSourceWidget : public QWidget, protected MouseHoverComposite
@@ -29,6 +30,7 @@ private:
     QSharedPointer<QLabel> m_sourceLabel;
     IconButton* m_deleteButton;
     IconButton* m_editButton;
+    CheckButton *m_includeHiddenButton;
 };
 
 #endif // BACKUPSOURCEWIDGET_H

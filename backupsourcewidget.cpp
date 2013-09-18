@@ -12,7 +12,8 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     m_source(source),
     m_sourceLabel(WidgetSettings::newTextLabel(this)),
     m_deleteButton(new IconButton(this)),
-    m_editButton(new IconButton(this))
+    m_editButton(new IconButton(this)),
+    m_includeHiddenButton(new CheckButton(this))
 {
     m_sourceLabel->setText(m_source->directory().absolutePath());
     this->setLayout(new QHBoxLayout(this));
@@ -22,8 +23,15 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
             this,
             SIGNAL(deleteButtonClicked()));
     m_editButton->setSVG(":/edit");
+    m_includeHiddenButton->setText(tr("hidden files"));
+    QFont font = WidgetSettings::buttonFont();
+    font.setPointSize(font.pointSize() - 1);
+    m_includeHiddenButton->setFont(font);
+    m_includeHiddenButton->setContentsMargins(0, 0, 0, 0);
+    m_includeHiddenButton->setMouseHoverColor(WidgetSettings::iconButtonMouseOverColor());
     layout()->setContentsMargins(8, 1, 8, 1);
     layout()->addWidget(m_sourceLabel.data());
+    layout()->addWidget(m_includeHiddenButton);
     layout()->addWidget(m_editButton);
     layout()->addWidget(m_deleteButton);
     ((QHBoxLayout*)layout())->addSpacerItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Ignored));
