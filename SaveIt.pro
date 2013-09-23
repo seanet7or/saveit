@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     backupplanlist.cpp \
     backupplaneditsourcesfilters.cpp \
     backupsource.cpp \
-    backupsourcewidget.cpp
+    backupsourcewidget.cpp \
+    filtereditdlg.cpp
 
 HEADERS  += mainwindow.h \
     backupplan.h \
@@ -34,10 +35,12 @@ HEADERS  += mainwindow.h \
 	backupsrcdlg.h \
     backupplaneditsourcesfilters.h \
     backupsource.h \
-    backupsourcewidget.h
+    backupsourcewidget.h \
+    filtereditdlg.h
 
 FORMS    += mainwindow.ui \
-    backupplaneditsourcesfilters.ui
+    backupplaneditsourcesfilters.ui \
+    filtereditdlg.ui
 
 RESOURCES += \
     resources.qrc

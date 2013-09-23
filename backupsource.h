@@ -8,6 +8,7 @@ class BackupSource
 public:
     BackupSource(QDir dir);
     QDir directory() const;
+    void setDirectory(const QString &dir);
 private:
     QDir m_dir;
 };

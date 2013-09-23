@@ -8,5 +8,9 @@
         <file alias="edit">images/edit.svg</file>
         <file alias="continue">images/continue.svg</file>
         <file alias="cancel">images/cancel.svg</file>
+        <file alias="filter-add">images/filter-add.svg</file>
+        <file alias="filter-addarchive">images/filter-addarchive.svg</file>
+        <file alias="filter-addiso">images/filter-addiso.svg</file>
+        <file alias="filter-addtemp">images/filter-addtemp.svg</file>
     </qresource>
 </RCC>

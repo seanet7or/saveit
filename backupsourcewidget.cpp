@@ -2,6 +2,7 @@
 #include "backupsource.h"
 #include "widgetsettings.h"
 #include <QVBoxLayout>
+#include <QFileDialog>
 #include "delegates/mousehoverable.h"
 
 
@@ -11,13 +12,14 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     MouseHoverComposite(new MouseHoverable(this)),
     m_source(source),
     m_sourceLabel(WidgetSettings::newTextLabel(this)),
-    m_deleteButton(new IconButton(this)),
+    m_deleteButton(new PushButton(this)),
     m_editButton(new IconButton(this)),
     m_includeHiddenButton(new CheckButton(this))
 {
     m_sourceLabel->setText(m_source->directory().absolutePath());
     this->setLayout(new QHBoxLayout(this));
     m_deleteButton->setSVG(":/delete");
+    m_deleteButton->setContentsMargins(0, 0, 0, 0);
     connect(m_deleteButton,
             SIGNAL(pressed()),
             this,
@@ -27,6 +29,7 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     QFont font = WidgetSettings::buttonFont();
     font.setPointSize(font.pointSize() - 1);
     m_includeHiddenButton->setFont(font);
+    m_deleteButton->setFont(font);
     m_includeHiddenButton->setContentsMargins(0, 0, 0, 0);
     m_includeHiddenButton->setMouseHoverColor(WidgetSettings::iconButtonMouseOverColor());
     layout()->setContentsMargins(8, 1, 8, 1);
@@ -35,9 +38,12 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     layout()->addWidget(m_editButton);
     layout()->addWidget(m_deleteButton);
     ((QHBoxLayout*)layout())->addSpacerItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Ignored));
-    int h = m_sourceLabel->height();
-    m_deleteButton->setFixedHeight(h);
+    int h = m_includeHiddenButton->minimumHeight();
     m_editButton->setFixedHeight(h);
+    connect(m_editButton,
+            SIGNAL(clicked()),
+            this,
+            SLOT(OnEditButtonPressed()));
     setFixedHeight(h);
 }
 
@@ -58,4 +64,17 @@ void BackupSourceWidget::paintEvent(QPaintEvent *e)
 QSharedPointer<BackupSource> BackupSourceWidget::source() const
 {
      return m_source;
+}
+
+
+void BackupSourceWidget::OnEditButtonPressed()
+{
+    QString dir = QFileDialog::getExistingDirectory(this,
+                                                    tr("Select a folder to add to the backup"),
+                                                    m_source->directory().absolutePath());
+    if (!dir.isEmpty())
+    {
+        m_source->setDirectory(dir);
+        m_sourceLabel->setText(dir);
+    }
 }

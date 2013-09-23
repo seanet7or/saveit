@@ -25,10 +25,13 @@ public slots:
 protected:
     virtual void paintEvent(QPaintEvent *);
 
+private slots:
+    void OnEditButtonPressed();
+
 private:
     QSharedPointer<BackupSource> m_source;
     QSharedPointer<QLabel> m_sourceLabel;
-    IconButton* m_deleteButton;
+    PushButton* m_deleteButton;
     IconButton* m_editButton;
     CheckButton *m_includeHiddenButton;
 };

@@ -26,6 +26,7 @@ private:
 
 private slots:
     void onAddSourceButtonPressed();
+    void onAddFilterButtonPressed();
     void onDeleteButtonPressed();
 
 private:
@@ -37,6 +38,11 @@ private:
     PushButton *m_addSourceFile;
     PushButton *m_continue;
     PushButton *m_cancel;
+    PushButton *m_addIsoFiles;
+    PushButton *m_addArchiveFiles;
+    PushButton *m_addTemporaryFiles;
+    PushButton *m_addCustomFilter;
+
 };
 
 #endif // BACKUPPLANEDITSOURCESFILTERS_H

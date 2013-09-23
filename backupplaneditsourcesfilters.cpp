@@ -6,6 +6,7 @@
 #include "widgetsettings.h"
 #include "pushbutton.h"
 #include "backupsourcewidget.h"
+#include "filtereditdlg.h"
 
 
 BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
@@ -20,7 +21,11 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     m_addSourceFolder(new PushButton(this)),
     m_addSourceFile(new PushButton(this)),
     m_continue(new PushButton(this)),
-    m_cancel(new PushButton(this))
+    m_cancel(new PushButton(this)),
+    m_addArchiveFiles(new PushButton(this)),
+    m_addCustomFilter(new PushButton(this)),
+    m_addIsoFiles(new PushButton(this)),
+    m_addTemporaryFiles(new PushButton(this))
 {
     ui->setupUi(this);
     setWindowTitle(tr("Creating A New Backup - Select Sources"));
@@ -38,11 +43,28 @@ BackupPlanEditSourcesFilters::BackupPlanEditSourcesFilters(QWidget *parent) :
     layout->setContentsMargins(0, 0, 0, 0);
     m_sourcesWidget->addButton(m_addSourceFolder);
     m_sourcesWidget->addButton(m_addSourceFile);
+    m_addSourceFile->setVisible(false);
     addSource(QDir::homePath());
     m_continue->setSVG(":/continue");
     m_continue->setText(tr("Continue"));
     m_cancel->setSVG(":/cancel");
     m_cancel->setText(tr("Cancel"));
+    m_addTemporaryFiles->setText(tr("Exlude temporary files"));
+    m_addTemporaryFiles->setSVG(":/filter-addtemp");
+    m_addIsoFiles->setText(tr("Exclude disc images"));
+    m_addIsoFiles->setSVG(":/filter-addiso");
+    m_addArchiveFiles->setText(tr("Exclude archive files"));
+    m_addArchiveFiles->setSVG(":/filter-addarchive");
+    m_addCustomFilter->setText(tr("Add a custom filter"));
+    m_addCustomFilter->setSVG(":/filter-add");
+    connect(m_addCustomFilter,
+            SIGNAL(pressed()),
+            this,
+            SLOT(onAddFilterButtonPressed()));
+    m_filtersWidget->addButton(m_addTemporaryFiles);
+    m_filtersWidget->addButton(m_addIsoFiles);
+    m_filtersWidget->addButton(m_addArchiveFiles);
+    m_filtersWidget->addButton(m_addCustomFilter);
     layout->addWidget(m_sourcesWidget);
     layout->addWidget(m_filtersWidget);
     QHBoxLayout *nextLayout = new QHBoxLayout();
@@ -95,4 +117,12 @@ void BackupPlanEditSourcesFilters::onDeleteButtonPressed()
         delete w;
         m_sourceList.removeAt(m_sourceList.indexOf(source));
     }
+}
+
+
+void BackupPlanEditSourcesFilters::onAddFilterButtonPressed()
+{
+    FilterEditDlg *filterEditDlg = new FilterEditDlg(this);
+    filterEditDlg->exec();
+    delete filterEditDlg;
 }
