@@ -12,24 +12,31 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     MouseHoverComposite(new MouseHoverable(this)),
     m_source(source),
     m_sourceLabel(WidgetSettings::newTextLabel(this)),
-    m_deleteButton(new PushButton(this)),
-    m_editButton(new IconButton(this)),
-    m_includeHiddenButton(new CheckButton(this))
+    m_deleteButton(new PushButton(this, this)),
+    m_editButton(new PushButton(this, this)),
+    m_includeHiddenButton(new CheckButton(this, this))
 {
     m_sourceLabel->setText(m_source->directory().absolutePath());
+    QFont font = m_sourceLabel->font();
+    font.setBold(true);
+    m_sourceLabel->setFont(font);
     this->setLayout(new QHBoxLayout(this));
     m_deleteButton->setSVG(":/delete");
+    m_editButton->setSVG(":/edit");
     m_deleteButton->setContentsMargins(0, 0, 0, 0);
+    m_editButton->setContentsMargins(0, 0, 0, 0);
+    m_deleteButton->setMouseHoverColor(WidgetSettings::iconButtonMouseOverColor());
+    m_editButton->setMouseHoverColor(WidgetSettings::iconButtonMouseOverColor());
     connect(m_deleteButton,
             SIGNAL(pressed()),
             this,
             SIGNAL(deleteButtonClicked()));
-    m_editButton->setSVG(":/edit");
     m_includeHiddenButton->setText(tr("hidden files"));
-    QFont font = WidgetSettings::buttonFont();
+    font = WidgetSettings::buttonFont();
     font.setPointSize(font.pointSize() - 1);
     m_includeHiddenButton->setFont(font);
     m_deleteButton->setFont(font);
+    m_editButton->setFont(font);
     m_includeHiddenButton->setContentsMargins(0, 0, 0, 0);
     m_includeHiddenButton->setMouseHoverColor(WidgetSettings::iconButtonMouseOverColor());
     layout()->setContentsMargins(8, 1, 8, 1);
@@ -39,7 +46,6 @@ BackupSourceWidget::BackupSourceWidget(QSharedPointer<BackupSource> source,
     layout()->addWidget(m_deleteButton);
     ((QHBoxLayout*)layout())->addSpacerItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Ignored));
     int h = m_includeHiddenButton->minimumHeight();
-    m_editButton->setFixedHeight(h);
     connect(m_editButton,
             SIGNAL(clicked()),
             this,

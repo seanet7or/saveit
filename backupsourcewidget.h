@@ -32,7 +32,7 @@ private:
     QSharedPointer<BackupSource> m_source;
     QSharedPointer<QLabel> m_sourceLabel;
     PushButton* m_deleteButton;
-    IconButton* m_editButton;
+    PushButton* m_editButton;
     CheckButton *m_includeHiddenButton;
 };
 

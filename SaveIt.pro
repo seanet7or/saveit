@@ -18,10 +18,11 @@ SOURCES += main.cpp\
     backupplan.cpp \
 	backupplanlistwidget.cpp \
     backupplanlist.cpp \
-    backupplaneditsourcesfilters.cpp \
     backupsource.cpp \
     backupsourcewidget.cpp \
-    filtereditdlg.cpp
+    filtereditdlg.cpp \
+    basedlg.cpp \
+    editsourcesdlg.cpp
 
 HEADERS  += mainwindow.h \
     backupplan.h \
@@ -33,13 +34,13 @@ HEADERS  += mainwindow.h \
 	Animator.h \
 	dialog.h \
 	backupsrcdlg.h \
-    backupplaneditsourcesfilters.h \
     backupsource.h \
     backupsourcewidget.h \
-    filtereditdlg.h
+    filtereditdlg.h \
+    basedlg.h \
+    editsourcesdlg.h
 
 FORMS    += mainwindow.ui \
-    backupplaneditsourcesfilters.ui \
     filtereditdlg.ui
 
 RESOURCES += \
